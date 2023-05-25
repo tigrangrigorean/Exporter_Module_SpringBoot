@@ -31,7 +31,6 @@ public class TransactionServiceImpl implements TransactionService{
 
 	@Override
 	public byte[] importTransactionXLSX(String path) {
-		byte[] result = new byte[0];
 	     
 	        StringBuilder stringBuilder = new StringBuilder();
 	      try {
@@ -64,7 +63,7 @@ public class TransactionServiceImpl implements TransactionService{
 		} catch (IOException e) {
 			throw new InjuryFileException("Input/Output file wrong operation");
 		}
-	        return result = stringBuilder.toString().getBytes();
+	        return stringBuilder.toString().getBytes();
 	    
 	    }
 	
@@ -84,7 +83,7 @@ public class TransactionServiceImpl implements TransactionService{
         row.createCell(4).setCellValue(transaction.getDate());
         }
         
-        try (FileOutputStream outputStream = new FileOutputStream(new File("C:/Users/Tiko/Desktop/excel.xlsx"))) {
+        try (FileOutputStream outputStream = new FileOutputStream(new File("transaction.xlsx"))) {
 				workbook.write(outputStream);
 				workbook.close();
         }catch (IOException e) {
@@ -114,7 +113,7 @@ public class TransactionServiceImpl implements TransactionService{
 	public List<Transaction> exportTransactionPDF(List<Transaction> transactionsList) {
 		try {
 		        Document document = new Document();
-		        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(new File("C:/Users/Tiko/Desktop/excel.pdf")));
+		        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(new File("transaction.pdf")));
 		        document.open();
 		        for (Transaction transaction : transactionsList) {
 		            Paragraph paragraph = new Paragraph(transaction.toString());
